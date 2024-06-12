@@ -71,19 +71,6 @@ public class Order {
         calculateOrderTotal();
     }
 
-    public void placeOrder() {
-
-        if (shipmentAddress == null) {
-            setDefaultShipmentAddress();
-        }
-
-        if (discountPolicy == null) {
-            setDefaultDiscountPolicy();
-        }
-
-        calculateOrderTotal();
-    }
-
     public String getId() {
         return id;
     }
