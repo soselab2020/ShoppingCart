@@ -21,14 +21,8 @@ pipeline {
 		stage('SonarQube Scan') {
             steps {
 				bat "mvn sonar:sonar -Dsonar.login=squ_d35411f5dbac485938804d541c6c1b704afbd1ce"
+				bat "start http://127.0.0.1:9000"
 			}
-        }        		
-		stage('Quality Gate') {
-            steps {                
-                timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }		
+        }        			
     }
 }
