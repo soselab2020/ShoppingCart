@@ -23,19 +23,13 @@ pipeline {
                 withSonarQubeEnv('MySonarQube') {
                     bat "mvn sonar:sonar -Dsonar.token=sqa_fab10f76fcf200f05a795531dd3243d04ffdc476"
                 }
-            }
-        }
-        stage('Quality Gate') {
-            steps {
-                script {
-                    timeout(time: 2, unit: 'MINUTES') {
-                        def qg = waitForQualityGate()
-                        if (qg.status != 'OK') {
-                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                        }
-                    }
+				script {                    
+					def qg = waitForQualityGate()
+					if (qg.status != 'OK') {
+						error "Pipeline aborted due to quality gate failure: ${qg.status}"
+					}                   
                 }
             }
-        }
+        }        
     }
 }
