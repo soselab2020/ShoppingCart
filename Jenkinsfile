@@ -20,7 +20,7 @@ pipeline {
         }		
 		stage('SonarQube Scan') {
             steps {
-				withSonarQubeEnv('SonarTiss'){
+				withSonarQubeEnv('MySonarQube'){
 					bat "mvn sonar:sonar -Dsonar.login=squ_d35411f5dbac485938804d541c6c1b704afbd1ce"
 				}	
 			}
