@@ -21,18 +21,15 @@ pipeline {
         stage('SonarQube Scan') {
             steps {
                 withSonarQubeEnv('MySonarQube') {
-                    bat "mvn sonar:sonar -Dsonar.token=sqa_fab10f76fcf200f05a795531dd3243d04ffdc476"
+                    bat "mvn sonar:sonar -Dsonar.token=sqa_6d93f8b366cfdde26d93775021d2d3b72710a1cc"
                 }				
             }
         }
         stage('Quality Gate') {
             steps {
                 script {
-                    timeout(time: 2, unit: 'MINUTES') {
-                        def qg = waitForQualityGate()
-                        if (qg.status == 'ERROR') {
-                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                        }
+                    timeout(time: 1, unit: 'MINUTES') {
+                        waitForQualityGateAbort()
                     }
                 }
             }
