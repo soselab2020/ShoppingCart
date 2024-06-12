@@ -14,6 +14,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat "mvn package"
+				bat "java -jar ShoppingCart-1.0-SNAPSHOT.jar"
             }
         }
     }
